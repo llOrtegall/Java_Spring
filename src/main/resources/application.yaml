@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: store
+  datasource:
+    url: jdbc:mysql://172.20.1.70:9010/ecomerce_db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      connection-timeout: 30000
+      max-lifetime: 600000
+      pool-name: HikariPool
+    validation-query: SELECT 1
+    username: root
+    password: rootpassword
+  jpa:
+    show-sql: true
