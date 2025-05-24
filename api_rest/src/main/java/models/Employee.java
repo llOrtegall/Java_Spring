@@ -2,10 +2,7 @@ package models;
 
 public class Employee {
   private int id;
-  private String names;
-  private String lastNames;
-  private String email;
-  private String phone;
+  private String names, lastNames, email, phone;
 
   public Employee(int id, String names, String lastNames, String email, String phone) {
     this.id = id;
