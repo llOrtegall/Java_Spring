@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
 
 import ortega.inyeccion.example.models.Products;
-import ortega.inyeccion.example.services.Products_Services_Imp;
+import ortega.inyeccion.example.services.ProductServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class Products_Controller {
 
     // private Products_Services_Imp service = new Products_Services_Imp();
     @Autowired
-    private Products_Services_Imp service;
+    private ProductServices service;
 
     @GetMapping("/products")
     public List<Products> getAllProducts(){

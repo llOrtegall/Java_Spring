@@ -3,17 +3,17 @@ package ortega.inyeccion.example.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import ortega.inyeccion.example.models.Products;
-import ortega.inyeccion.example.repository.Repo_Products_Imp;
+import ortega.inyeccion.example.repository.ProductRepository;
 
-@Component
+@Service
 public class Products_Services_Imp implements ProductServices {
   //TODO: implementación anterior => private Repo_Products_Imp repository = new Repo_Products_Imp();
 
   @Autowired // esto se utiliza para inyectar la dependencia
-  private Repo_Products_Imp repository;
+  private ProductRepository repository;
 
   @Override
   public List<Products> findAll() {

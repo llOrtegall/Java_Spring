@@ -3,11 +3,11 @@ package ortega.inyeccion.example.repository;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ortega.inyeccion.example.models.Products;
 
-@Component
+@Repository
 public class Repo_Products_Imp implements ProductRepository{
   List<Products> data;
 
