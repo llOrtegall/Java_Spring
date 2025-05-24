@@ -5,10 +5,10 @@ import java.util.List;
 
 import ortega.inyeccion.example.models.Products;
 
-public class Repo_Products {
+public class Repo_Products_Imp implements ProductRepository{
   List<Products> data;
 
-  public Repo_Products() {
+  public Repo_Products_Imp() {
     this.data = Arrays.asList(new Products(001L, "Monitor", "Description 1", 10.00),
         new Products(002L, "Keyboard", "Description 2", 20.00),
         new Products(003L, "Mouse", "Description 3", 30.00),

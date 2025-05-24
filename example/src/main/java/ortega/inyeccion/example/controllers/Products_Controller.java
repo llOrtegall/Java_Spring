@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
 
 import ortega.inyeccion.example.models.Products;
-import ortega.inyeccion.example.services.Products_Services;
+import ortega.inyeccion.example.services.Products_Services_Imp;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api")
 public class Products_Controller {
 
-    private Products_Services service = new Products_Services();
+    private Products_Services_Imp service = new Products_Services_Imp();
 
     @GetMapping("/products")
     public List<Products> getAllProducts(){
