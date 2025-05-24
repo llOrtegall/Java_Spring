@@ -1,6 +1,3 @@
-/*
- */
-
 package ortega.inyeccion.example.services;
 
 import java.util.List;

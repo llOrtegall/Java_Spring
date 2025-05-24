@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api")
 public class Products_Controller {
 
-    private Products_Services service = new Products_Services();
-
     @GetMapping("/products")
     public List<Products> getAllProducts(){
+        Products_Services service = new Products_Services();
         return service.findAll();
     }
 
     @GetMapping("/product/{id}")
     public Products getProductById(@PathVariable Long id){
+        Products_Services service = new Products_Services();
         return service.findById(id);
     }
 }
