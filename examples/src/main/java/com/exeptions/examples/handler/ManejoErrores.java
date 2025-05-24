@@ -11,4 +11,9 @@ public class ManejoErrores {
     public ResponseEntity<String> handlerArithmeticException(ArithmeticException e) {
         return new ResponseEntity<>("División por cero no permitida", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public ResponseEntity<String> handlerNumberFormatException(NumberFormatException e) {
+        return new ResponseEntity<>("Error: valor ingresado no es númerico", HttpStatus.BAD_REQUEST);
+    }
 }
