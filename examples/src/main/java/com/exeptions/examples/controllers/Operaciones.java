@@ -14,11 +14,10 @@ public class Operaciones {
       @RequestParam(name = "numerador") String numeradorSrt,
       @RequestParam(name = "denominador") String denominadorStr) {
 
-
     try {
       int numerador = Integer.parseInt(numeradorSrt);
       int denominador = Integer.parseInt(denominadorStr);
-      
+
       int resultado = numerador / denominador;
 
       return String.format("El resultado de la división es: %d", resultado);
@@ -29,4 +28,15 @@ public class Operaciones {
     }
 
   }
+}
+
+@RestController
+class Null_P_E {
+  @GetMapping("valornulo")
+  public String Nullo() {
+    String variable = null;
+    variable.length();
+    return "Valor nulo en la variable";
+  }
+
 }
