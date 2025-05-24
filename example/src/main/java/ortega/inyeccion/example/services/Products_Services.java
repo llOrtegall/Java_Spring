@@ -12,8 +12,8 @@ public class Products_Services {
   public List<Products> findAll() {
     return repository.findAll().stream().map(p -> {
       Double priceTotal = p.getPrice() * 1.21d;
-      p.setPrice(priceTotal);
-      return p;
+      Products newProduct = new Products(p.getIdProduct(), p.getName(), p.getDescription(), priceTotal);
+      return newProduct;
     }).toList();
   }
 
