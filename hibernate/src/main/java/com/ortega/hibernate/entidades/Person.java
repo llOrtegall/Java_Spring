@@ -17,7 +17,7 @@ public class Person {
 
   private String names;
 
-  private String lastNames;
+  private String lastnames;
 
   @Column(name = "lenguajes")
   private String lenguaje;
@@ -26,10 +26,10 @@ public class Person {
     // Default constructor for JPA
   }
 
-  public Person(Long id, String names, String lastNames, String lenguaje) {
+  public Person(Long id, String names, String lastnames, String lenguaje) {
     this.id = id;
     this.names = names;
-    this.lastNames = lastNames;
+    this.lastnames = lastnames;
     this.lenguaje = lenguaje;
   }
 
@@ -49,12 +49,12 @@ public class Person {
     this.names = names;
   }
 
-  public String getLastNames() {
-    return lastNames;
+  public String getLastnames() {
+    return lastnames;
   }
 
-  public void setLastNames(String lastNames) {
-    this.lastNames = lastNames;
+  public void setLastnames(String lastnames) {
+    this.lastnames = lastnames;
   }
 
   public String getLenguaje() {
@@ -67,6 +67,6 @@ public class Person {
 
   @Override
   public String toString() {
-    return "[id=" + id + ", names=" + names + ", lastNames=" + lastNames + ", lenguaje=" + lenguaje + "]";
+    return "[id=" + id + ", names=" + names + ", lastnames=" + lastnames + ", lenguaje=" + lenguaje + "]";
   }
 }

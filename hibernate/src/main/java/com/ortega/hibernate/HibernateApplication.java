@@ -7,13 +7,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.ortega.hibernate.repositorys.Person;
+import com.ortega.hibernate.entidades.Person;
+import com.ortega.hibernate.repositorys.Repo_Person;
 
 @SpringBootApplication
-public class HibernateApplication  implements CommandLineRunner{
+public class HibernateApplication implements CommandLineRunner {
 
 	@Autowired
-	private Person personRepo;
+	private Repo_Person personRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HibernateApplication.class, args);
