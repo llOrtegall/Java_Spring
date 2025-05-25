@@ -1,11 +1,19 @@
 package com.ortega.hibernate;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.ortega.hibernate.repositorys.Person;
+
 @SpringBootApplication
 public class HibernateApplication  implements CommandLineRunner{
+
+	@Autowired
+	private Person personRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HibernateApplication.class, args);
@@ -13,7 +21,8 @@ public class HibernateApplication  implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		// this method can be used to execute code after the application has started
+		List<Person> persons = (List<Person>) personRepo.findAll();
+		persons.stream().forEach(p -> System.out.println(p));
 	}
 
 }
