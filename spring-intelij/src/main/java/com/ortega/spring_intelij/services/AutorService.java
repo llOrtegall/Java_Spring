@@ -13,16 +13,16 @@ public class AutorService {
     @Autowired
     private AutoresRepository repo_autor;
 
-    public List<Autor> listarAutores() {
+    public List<Autor> getAllAutors() {
         return repo_autor.findAll();
     }
 
-    public Optional<Autor> buscarAutorPorId(Integer id) {
+    public Optional<Autor> findAutorById(Integer id) {
         return repo_autor.findById(id);
     }
 
     // this method is used to update an author <->
-    public Autor actualizarAutor(Long id, Autor act_autor) {
+    public Autor updateAutorById(Long id, Autor act_autor) {
         Optional<Autor> autorExiste = repo_autor.findById(id.intValue());
         if (autorExiste.isPresent()) {
             Autor autor = autorExiste.get();
@@ -35,11 +35,11 @@ public class AutorService {
         }
     }
 
-    public Autor guardarAutor(Autor autor) {
+    public Autor insertNewAutor(Autor autor) {
         return (Autor) repo_autor.save(autor);
     }
 
-    public void eliminarAutor(Integer id) {
+    public void deleteAutorById(Integer id) {
         repo_autor.deleteById(id);
     }
 

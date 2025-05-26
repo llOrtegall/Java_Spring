@@ -1,3 +1,27 @@
+-- Script para insertar datos de ejemplo en las tablas 'libros' y 'autores'
+
+INSERT INTO autores(nombre, nacionalidad, apellido) VALUES
+('Carlos', 'Mexicana', 'Ramírez'),
+('Lucía', 'Argentina', 'Fernández'),
+('Mateo', 'Chilena', 'Pérez'),
+('Isabela', 'Colombiana', 'Gómez'),
+('Julián', 'Peruana', 'Rojas'),
+('Camila', 'Uruguaya', 'Díaz'),
+('Sofía', 'Española', 'Martínez'),
+('Andrés', 'Venezolana', 'Torres'),
+('Valentina', 'Ecuatoriana', 'Castro'),
+('Sebastián', 'Boliviana', 'Navarro'),
+('Elena', 'Cubana', 'Mendoza'),
+('Tomás', 'Paraguaya', 'Vega'),
+('Renata', 'Costarricense', 'Morales'),
+('Emilio', 'Panameña', 'Herrera'),
+('Mariana', 'Hondureña', 'Suárez'),
+('Nicolás', 'Salvadoreña', 'Cano'),
+('Paula', 'Guatemalteca', 'Aguilar'),
+('Gabriel', 'Dominicana', 'Ortega'),
+('Ana', 'Nicaragüense', 'Delgado'),
+('Lorenzo', 'Puertorriqueña', 'Silva');
+
 INSERT INTO libros(genero, paginas, titulo, autor_id) VALUES
 ('Novela', 320, 'La sombra del eco', 1),
 ('Ciencia Ficción', 280, 'Horizonte Infinito', 2),
@@ -40,27 +64,4 @@ INSERT INTO libros(genero, paginas, titulo, autor_id) VALUES
 ('Infantil', 85, 'Clara y la luna', 19),
 ('Juvenil', 210, 'Puertas paralelas', 20);
 
-
-INSERT INTO autores(nombre, nacionalidad, apellido) VALUES
-('Carlos', 'Mexicana', 'Ramírez'),
-('Lucía', 'Argentina', 'Fernández'),
-('Mateo', 'Chilena', 'Pérez'),
-('Isabela', 'Colombiana', 'Gómez'),
-('Julián', 'Peruana', 'Rojas'),
-('Camila', 'Uruguaya', 'Díaz'),
-('Sofía', 'Española', 'Martínez'),
-('Andrés', 'Venezolana', 'Torres'),
-('Valentina', 'Ecuatoriana', 'Castro'),
-('Sebastián', 'Boliviana', 'Navarro'),
-('Elena', 'Cubana', 'Mendoza'),
-('Tomás', 'Paraguaya', 'Vega'),
-('Renata', 'Costarricense', 'Morales'),
-('Emilio', 'Panameña', 'Herrera'),
-('Mariana', 'Hondureña', 'Suárez'),
-('Nicolás', 'Salvadoreña', 'Cano'),
-('Paula', 'Guatemalteca', 'Aguilar'),
-('Gabriel', 'Dominicana', 'Ortega'),
-('Ana', 'Nicaragüense', 'Delgado'),
-('Lorenzo', 'Puertorriqueña', 'Silva');
-
-SELECT * FROM autores;
+SELECT * FROM libros;

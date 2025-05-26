@@ -17,7 +17,11 @@ public class LibroService {
   @Autowired
   private AutoresRepository autorRepository;
 
-  public Libro guardarLibro(Libro libro) {
+  public List<Libro> getAllBooks() {
+    return repo_libro.findAll();
+  }
+
+  public Libro insertNewBook(Libro libro) {
     Optional<Autor> autor = autorRepository.findById(libro.getAutor().getId());
     if (autor.isPresent()) {
       libro.setAutor(autor.get());
@@ -28,15 +32,31 @@ public class LibroService {
     
   }
 
-  public List<Libro> listarLibros() {
-    return repo_libro.findAll();
+  public Libro updateBookById(Integer id, Libro upd_libro) {
+    Optional<Libro> existingLibro = repo_libro.findById(id);
+    if (existingLibro.isPresent()) {
+      Libro update = existingLibro.get();
+
+      update.setTitulo(upd_libro.getTitulo());
+      update.setGenero(upd_libro.getGenero());
+      update.setPaginas(upd_libro.getPaginas());
+
+      Autor getAutor = existingLibro.get().getAutor();
+
+      // check this implementation
+      update.setAutor(getAutor);
+
+      return repo_libro.save(update);
+    } else {
+      throw new RuntimeException("Libro no encontrado");
+    }
   }
 
-  public void eliminarLibro(Integer id) {
+  public void deleteBookById(Integer id) {
     repo_libro.deleteById(id);
   }
 
-  public Optional<Libro> buscarLibroPorId(Integer id) {
+  public Optional<Libro> findBookById(Integer id) {
     return repo_libro.findById(id);
   }
 }
