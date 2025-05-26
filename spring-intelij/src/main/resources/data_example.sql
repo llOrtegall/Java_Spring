@@ -62,3 +62,5 @@ INSERT INTO autores(nombre, nacionalidad, apellido) VALUES
 ('Gabriel', 'Dominicana', 'Ortega'),
 ('Ana', 'Nicaragüense', 'Delgado'),
 ('Lorenzo', 'Puertorriqueña', 'Silva');
+
+SELECT * FROM autores;

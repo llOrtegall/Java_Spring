@@ -8,10 +8,11 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/api/autores")
@@ -37,4 +38,16 @@ public class AutorController {
         Autor autor = serv_autor.guardarAutor(in_autor);
         return new ResponseEntity<>(autor, HttpStatus.CREATED);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Autor> actualizarAutor(@PathVariable Long id, @Valid @RequestBody Autor act_autor){
+        Autor autor = serv_autor.actualizarAutor(id, act_autor);
+        if (autor != null) {
+            return new ResponseEntity<>(autor, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 }

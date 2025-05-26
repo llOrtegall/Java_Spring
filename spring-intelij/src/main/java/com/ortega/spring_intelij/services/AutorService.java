@@ -21,6 +21,20 @@ public class AutorService {
         return repo_autor.findById(id);
     }
 
+    // this method is used to update an author <->
+    public Autor actualizarAutor(Long id, Autor act_autor) {
+        Optional<Autor> autorExiste = repo_autor.findById(id.intValue());
+        if (autorExiste.isPresent()) {
+            Autor autor = autorExiste.get();
+            autor.setNombre(act_autor.getNombre());
+            autor.setApellido(act_autor.getApellido());
+            autor.setNacionalidad(act_autor.getNacionalidad());
+            return repo_autor.save(autor);
+        } else {
+            return null; // or throw an exception
+        }
+    }
+
     public Autor guardarAutor(Autor autor) {
         return (Autor) repo_autor.save(autor);
     }
