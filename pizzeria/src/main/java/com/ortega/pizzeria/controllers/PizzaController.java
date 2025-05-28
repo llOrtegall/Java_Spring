@@ -17,15 +17,14 @@ public class PizzaController {
 
     @GetMapping
     public ResponseEntity<List<PizzaEntity>> getAll(){
-        List<PizzaEntity> pizzas = pizza_Service.getAllPizzas();
-        return new ResponseEntity<>(pizzas, HttpStatus.OK);
+        return ResponseEntity.ok(this.pizza_Service.getAllPizzas());
     }
 
     @GetMapping("/{idPizza}")
     public ResponseEntity<PizzaEntity> getPizzaById(@PathVariable int idPizza){
         PizzaEntity pizza = pizza_Service.getPizzaById(idPizza);
         if (pizza != null) {
-            return new ResponseEntity<>(pizza, HttpStatus.OK);
+            return ResponseEntity.ok(pizza);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -33,16 +32,34 @@ public class PizzaController {
 
     @PostMapping
     public ResponseEntity<PizzaEntity> insertNewPizza(@RequestBody PizzaEntity newPizza){
-        return ResponseEntity.ok(pizza_Service.save(newPizza));
+        try {
+            if(newPizza.getIdPizza() == null || !this.pizza_Service.existPizzaById(newPizza.getIdPizza())){
+                return ResponseEntity.status(HttpStatus.CREATED)
+                        .body(this.pizza_Service.save(newPizza));
+            }
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+
+        } catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
     }
 
     @PutMapping
-    public ResponseEntity<PizzaEntity> updatePizza(@RequestBody PizzaEntity newPizza){
-        if(newPizza.getIdPizza() != null && this.pizza_Service.existPizzaById(newPizza.getIdPizza())){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<PizzaEntity> updatePizza(@RequestBody PizzaEntity updatedPizza){
+        if(updatedPizza.getIdPizza() != null && this.pizza_Service.existPizzaById(updatedPizza.getIdPizza())){
+            try {
+                return ResponseEntity.ok(this.pizza_Service.save(updatedPizza));
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body(null);
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
-        PizzaEntity savedPizza = pizza_Service.save(newPizza);
-        return new ResponseEntity<>(savedPizza, HttpStatus.CREATED);
     }
 }
