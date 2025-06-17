@@ -7,10 +7,32 @@ plugins {
 group = 'com'
 version = '0.0.1-SNAPSHOT'
 
+// Configuración específica para Java 24
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(24)
+		// Especificar el vendor si es necesario
+		vendor = JvmVendorSpec.ADOPTIUM
 	}
+	sourceCompatibility = JavaVersion.VERSION_24
+	targetCompatibility = JavaVersion.VERSION_24
+}
+
+// Configuración de compilación para Java 24
+compileJava {
+	options.encoding = 'UTF-8'
+	options.compilerArgs += [
+		'-parameters',
+		'--enable-preview'  // Si necesitas usar preview features
+	]
+}
+
+compileTestJava {
+	options.encoding = 'UTF-8'
+	options.compilerArgs += [
+		'-parameters',
+		'--enable-preview'  // Si necesitas usar preview features
+	]
 }
 
 repositories {
@@ -19,10 +41,25 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	
+	// Dependencias para desarrollo
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	
+	// Dependencias de test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+	// Configuración para Java 24
+	jvmArgs '--enable-preview'  // Si usas preview features
+	systemProperty 'file.encoding', 'UTF-8'
+}
+
+// Configuración adicional para Spring Boot
+bootRun {
+	jvmArgs '--enable-preview'  // Si usas preview features
+	systemProperty 'file.encoding', 'UTF-8'
 }
