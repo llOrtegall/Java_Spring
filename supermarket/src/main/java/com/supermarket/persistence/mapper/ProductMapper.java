@@ -27,7 +27,10 @@ public interface ProductMapper {
     List<Product> toProducts(List<Producto> productos);
 
     @InheritInverseConfiguration
-    @Mapping(target = "codigoBarras", ignore = true)
+    @Mappings({
+            @Mapping(target = "idProducto", ignore = true), // Para INSERT, el ID se genera automáticamente
+            @Mapping(target = "codigoBarras", ignore = true)
+    })
     Producto toProducto(Product product);
 
 }

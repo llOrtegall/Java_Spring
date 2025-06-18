@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,8 +39,27 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public Product save(@RequestBody Product product) {
-        return productService.save(product);
+    public ResponseEntity<Product> save(@RequestBody Product product) {
+        try {
+            // Validación básica
+            if (product.getName() == null || product.getName().trim().isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            if (product.getCategoryId() <= 0) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            if (product.getPrice() <= 0) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+
+            // Asegurar que el ID esté en null para INSERT
+            product.setProductId(0);
+
+            Product savedProduct = productService.save(product);
+            return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/delete/{id}")
