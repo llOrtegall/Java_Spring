@@ -1,5 +1,6 @@
-package com.platzi.platzi_play;
+package com.platzi.platzi_play.web.controller;
 
+import com.platzi.platzi_play.domain.service.PPAIService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
