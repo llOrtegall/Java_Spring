@@ -8,12 +8,13 @@ import org.mapstruct.Mapping;
 import play.movies.domain.dto.MovieDto;
 import play.movies.persistence.entity.MovieEntity;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {GenreMapper.class, StateMapper.class})
 public interface MovieMapper {
 
     @Mapping(source = "titulo", target = "title")
     @Mapping(source = "duracion", target = "duration")
-    @Mapping(source = "genero", target = "genre")
+    @Mapping(source = "genero", target = "genre", qualifiedByName = "stringToGenre")
+    @Mapping(source = "estado", target = "state", qualifiedByName = "stringToBoolean")
     @Mapping(source = "fechaEstreno", target = "releaseDate")
     @Mapping(source = "calificacion", target = "rating")
     MovieDto toDto(MovieEntity entity);
