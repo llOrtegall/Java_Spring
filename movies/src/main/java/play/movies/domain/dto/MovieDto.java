@@ -2,10 +2,13 @@ package play.movies.domain.dto;
 
 import java.time.LocalDate;
 
+import play.movies.domain.Genre;
+
 public record MovieDto(
     String title,
     Integer duration,
-    String genre,
+    Genre genre,
+    Boolean state,
     LocalDate releaseDate,
     Double rating
 ) {
