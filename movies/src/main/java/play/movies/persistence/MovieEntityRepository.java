@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import play.movies.domain.dto.MovieDto;
+import play.movies.domain.dto.UpdateMovieDto;
 import play.movies.domain.repository.MovieRepository;
 import play.movies.persistence.crud.CrudMovieEntity;
 import play.movies.persistence.entity.MovieEntity;
@@ -30,5 +31,34 @@ public class MovieEntityRepository implements MovieRepository {
         MovieEntity movieEntity = this.crudMovieEntity.findById(id).orElse(null);
         return this.movieMapper.toDto(movieEntity);
     }
+
+    @Override
+    public MovieDto save(MovieDto movieDto) {
+        MovieEntity movieEntity = this.movieMapper.toEntity(movieDto);
+        movieEntity.setEstado("D");
+
+        return this.movieMapper.toDto(this.crudMovieEntity.save(movieEntity));
+    }
+
+    @Override
+    public MovieDto update(long id, UpdateMovieDto updateMovieDto) {
+        MovieEntity movieEntity = this.crudMovieEntity.findById(id).orElse(null);
+
+        if(movieEntity == null) return null;
+
+        this.movieMapper.updateEntityFromDto(updateMovieDto, movieEntity);
+
+        return this.movieMapper.toDto(this.crudMovieEntity.save(movieEntity));
+    }
+
+    @Override
+    public void delete(long id) {
+        MovieEntity findMovie = this.crudMovieEntity.findById(id).orElse(null);
+
+        if (findMovie == null) return;
+
+        this.crudMovieEntity.deleteById(id);  
+    }
+
 
 }
