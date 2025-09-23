@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import play.movies.domain.dto.MovieDto;
+import play.movies.domain.dto.UpdateMovieDto;
 import play.movies.domain.repository.MovieRepository;
 
 @Service
@@ -23,4 +24,15 @@ public class MovieService {
         return this.movieRepository.getById(id);
     }
 
+    public MovieDto addNewMovie(MovieDto movieDto){
+        return this.movieRepository.save(movieDto);
+    }
+
+    public MovieDto updateMovie(long id, UpdateMovieDto updateMovieDto){
+        return this.movieRepository.update(id, updateMovieDto);
+    }
+
+    public void deleteMovie(long id){
+        this.movieRepository.delete(id);
+    }
 }
