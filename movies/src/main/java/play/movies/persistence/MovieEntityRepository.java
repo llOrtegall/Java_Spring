@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import play.movies.domain.dto.MovieDto;
 import play.movies.domain.dto.UpdateMovieDto;
+import play.movies.domain.exception.MovieAlreadyExistsException;
 import play.movies.domain.repository.MovieRepository;
 import play.movies.persistence.crud.CrudMovieEntity;
 import play.movies.persistence.entity.MovieEntity;
@@ -34,6 +35,10 @@ public class MovieEntityRepository implements MovieRepository {
 
     @Override
     public MovieDto save(MovieDto movieDto) {
+        if(this.crudMovieEntity.findFirtsBytitulo(movieDto.title()) != null){
+            throw new MovieAlreadyExistsException(movieDto.title());
+        }
+
         MovieEntity movieEntity = this.movieMapper.toEntity(movieDto);
         movieEntity.setEstado("D");
 
