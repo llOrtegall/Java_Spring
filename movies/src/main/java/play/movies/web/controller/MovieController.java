@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import play.movies.domain.dto.MovieDto;
 import play.movies.domain.dto.UpdateMovieDto;
 import play.movies.domain.service.MovieService;
@@ -48,7 +49,7 @@ public class MovieController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MovieDto> updateMovie(@PathVariable long id, @RequestBody UpdateMovieDto updateMovieDto){
+    public ResponseEntity<MovieDto> updateMovie(@PathVariable long id, @RequestBody @Valid UpdateMovieDto updateMovieDto){
         return ResponseEntity.ok(this.movieService.updateMovie(id, updateMovieDto));
     }
 
