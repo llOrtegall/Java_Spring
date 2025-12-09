@@ -2,10 +2,13 @@ package play.movies.persistence.mapper;
 
 import java.util.List;
 
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import play.movies.domain.dto.MovieDto;
+import play.movies.domain.dto.UpdateMovieDto;
 import play.movies.persistence.entity.MovieEntity;
 
 @Mapper(componentModel = "spring", uses = {GenreMapper.class, StateMapper.class})
@@ -19,4 +22,14 @@ public interface MovieMapper {
     @Mapping(source = "calificacion", target = "rating")
     MovieDto toDto(MovieEntity entity);
     List<MovieDto> toDto(Iterable<MovieEntity> entities);
+
+    @InheritInverseConfiguration
+    @Mapping(source = "genre", target = "genero", qualifiedByName = "genreToString")
+    @Mapping(target = "estado", ignore = true)
+    MovieEntity toEntity(MovieDto dto);
+
+    @Mapping(target = "titulo", source = "title")
+    @Mapping(target = "fechaEstreno", source = "releaseDate")
+    @Mapping(target = "calificacion", source = "rating")
+    void updateEntityFromDto(UpdateMovieDto update, @MappingTarget MovieEntity movie);
 }
